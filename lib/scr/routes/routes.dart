@@ -1,3 +1,4 @@
+import 'package:componentes/scr/pages/InputPage.dart';
 import 'package:componentes/scr/pages/alert_page.dart';
 import 'package:componentes/scr/pages/animated_container.dart';
 import 'package:componentes/scr/pages/avatar_page.dart';
@@ -11,6 +12,7 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     'avatar': (BuildContext context) => AvatarPage(),
     'alert': (BuildContext context) => AlertPage(),
     'card': (BuildContext context) => CardPage(),
-    'animatedContainer': (BuildContext contex) => AnimatedContainerPage()
+    'animatedContainer': (BuildContext contex) => AnimatedContainerPage(),
+    'inputs': (BuildContext contex) => InputPage()
   };
 }
