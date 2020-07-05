@@ -14,6 +14,10 @@ class _InputPageState extends State<InputPage> {
 
   int _tamanoNombre = 0;
 
+  String _opcionSeleccionada = 'Volar';
+
+  List<String> _poderes = ['Volar', 'Super Fuerza', 'Rayos X', 'Velocidad'];
+
   TextEditingController _textEditingController = new TextEditingController();
 
   @override
@@ -32,6 +36,8 @@ class _InputPageState extends State<InputPage> {
           _crearPassword(),
           Divider(),
           _crearFecha(context),
+          Divider(),
+          _crearDropDown(),
           Divider(),
           _crearPersona(),
         ],
@@ -109,10 +115,36 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  Widget _crearPersona() {
-    return ListTile(
-      subtitle: Text('${_email.length == 0 ? '' : 'El email es $_email'}'),
-      title: Text('${_nombre.length == 0 ? '' : 'El nombre es $_nombre'}'),
+  List<DropdownMenuItem<String>> getOpcionesDropDown() {
+    List<DropdownMenuItem<String>> _lista = new List();
+    _poderes.forEach((element) {
+      _lista.add(DropdownMenuItem(
+        child: Text(element),
+        value: element,
+      ));
+    });
+
+    return _lista;
+  }
+
+  Widget _crearDropDown() {
+    return Row(
+      children: <Widget>[
+        Icon(Icons.select_all),
+        SizedBox(
+          width: 30.0,
+        ),
+        Expanded(
+          child: DropdownButton(
+              value: _opcionSeleccionada,
+              items: getOpcionesDropDown(),
+              onChanged: (opt) {
+                setState(() {
+                  _opcionSeleccionada = opt;
+                });
+              }),
+        )
+      ],
     );
   }
 
@@ -152,5 +184,13 @@ class _InputPageState extends State<InputPage> {
         _textEditingController.text = _fechaNacimiento;
       });
     }
+  }
+
+  Widget _crearPersona() {
+    return ListTile(
+      subtitle: Text('${_email.length == 0 ? '' : 'El email es $_email'}'),
+      title: Text('${_nombre.length == 0 ? '' : 'El nombre es $_nombre'}'),
+      trailing: Text(_opcionSeleccionada),
+    );
   }
 }
